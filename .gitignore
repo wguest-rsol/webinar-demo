@@ -169,3 +169,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+pwd-crack/hash_create.py
+pwd-crack/passwords.txt

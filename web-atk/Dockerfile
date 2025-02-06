@@ -1,0 +1,26 @@
+# Start with an official Ubuntu base image
+FROM ubuntu:24.04
+
+# Set environment variables to prevent interactive prompts during build
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt update && \
+    apt install -y hashcat curl iproute2 openssh-server gzip vim sudo gobuster ssh dnsutils
+    # Create a user named "attacker" and set the password "HelloWorld!"
+
+
+RUN useradd -m -s /bin/bash attacker && \
+echo "attacker:HelloWorld!" | chpasswd && \
+usermod -aG sudo attacker
+
+WORKDIR /home/attacker
+
+# Configure SSH to allow password authentication
+RUN mkdir /var/run/sshd
+COPY sshd_config /etc/ssh/sshd_config
+COPY common.txt /home/attacker/common.txt
+# Expose port 22 for SSH connections
+EXPOSE 22
+
+# Start SSH service and allow SSH connections
+CMD ["/usr/sbin/sshd", "-D"]

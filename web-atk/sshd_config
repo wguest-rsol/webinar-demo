@@ -1,0 +1,6 @@
+# Basic SSH config to allow password authentication
+PermitRootLogin no
+PasswordAuthentication yes
+UsePAM yes
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
