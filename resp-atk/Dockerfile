@@ -36,6 +36,9 @@ COPY sshd_config /etc/ssh/sshd_config
 # permissions for ssh
 RUN chmod 700 /home/attacker/.ssh && chmod 600 /home/attacker/.ssh/authorized_keys && chown -R attacker:attacker /home/attacker/.ssh
 
+# proxychains using 3434
+COPY proxychains4.conf /etc/proxychains4.conf
+
 # Expose port 22 for SSH connections
 EXPOSE 22
 
