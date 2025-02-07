@@ -1,1 +1,2 @@
+neo4j-ad/data/transactions/system/neostore.transaction.db.0 filter=lfs diff=lfs merge=lfs -text
 *.0 filter=lfs diff=lfs merge=lfs -text
