@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  proxy-atk:
+    build: ./proxy-atk
+    ports:
+      - "2225:22"
+    networks:
+      atk-network:
+        ipv4_address: 192.168.1.2
+    restart: unless-stopped
+
+  proxy-ext:
+    build: ./proxy-ext
+    networks:
+      atk-network:
+        ipv4_address: 192.168.1.3
+      ext-network:
+        ipv4_address: 192.168.2.2
+    restart: unless-stopped
+
+  proxy-int:
+    build: ./proxy-int
+    networks:
+      ext-network:
+        ipv4_address: 192.168.2.3
+    restart: unless-stopped
+
+networks:
+  atk-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+  ext-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24

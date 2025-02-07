@@ -1,0 +1,6 @@
+Include /etc/ssh/sshd_config.d/*.conf
+
+# Basic SSH config to allow password authentication
+PermitRootLogin no
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
